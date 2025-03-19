@@ -99,10 +99,9 @@ bi-dashboard/
 ├── components/ # React components
 │ ├── ui/ # UI components (shadcn)
 │ ├── dashboard-layout.tsx # Dashboard layout
-│ └── ... # Chart components, tables, etc.
 ├── lib/ # Utility functions
 │ ├── auth-context.tsx # Authentication context
-│ └── toast-utils.ts # Toast utilities
+│ └── toast.ts # Toast utilities
 ├── middleware.ts # Next.js middleware for auth
 ├── public/ # Static assets
 └── ...
