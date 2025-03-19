@@ -1,13 +1,24 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState, useEffect } from "react"
-import Link from "next/link"
-import { usePathname } from "next/navigation"
-import { BarChart3, CreditCard, Home, LogOut, Menu, Moon, Settings, Sun, User, Users } from "lucide-react"
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import {
+  BarChart3,
+  CreditCard,
+  Home,
+  LogOut,
+  Menu,
+  Moon,
+  Settings,
+  Sun,
+  User,
+  Users,
+} from "lucide-react";
 
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -15,25 +26,25 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { useAuth } from "@/lib/auth-context"
-import { useTheme } from "@/components/theme-provider"
+} from "@/components/ui/dropdown-menu";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { useAuth } from "@/lib/auth-context";
+import { useTheme } from "@/components/theme-provider";
 
 interface DashboardLayoutProps {
-  children: React.ReactNode
+  children: React.ReactNode;
 }
 
 export default function DashboardLayout({ children }: DashboardLayoutProps) {
-  const pathname = usePathname()
-  const { logout } = useAuth()
-  const { theme, setTheme } = useTheme()
-  const [isMounted, setIsMounted] = useState(false)
+  const pathname = usePathname();
+  const { logout } = useAuth();
+  const { theme, setTheme } = useTheme();
+  const [isMounted, setIsMounted] = useState(false);
 
-  // Prevent hydration mismatch
+
   useEffect(() => {
-    setIsMounted(true)
-  }, [])
+    setIsMounted(true);
+  }, []);
 
   const routes = [
     {
@@ -66,10 +77,10 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
       icon: Settings,
       active: pathname === "/dashboard/settings",
     },
-  ]
+  ];
 
   if (!isMounted) {
-    return null
+    return null;
   }
 
   return (
@@ -84,7 +95,10 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
           </SheetTrigger>
           <SheetContent side="left" className="w-72">
             <nav className="grid gap-2 text-lg font-medium">
-              <Link href="/dashboard" className="flex items-center gap-2 text-lg font-semibold">
+              <Link
+                href="/dashboard"
+                className="flex items-center gap-2 text-lg font-semibold"
+              >
                 <BarChart3 className="h-6 w-6" />
                 <span>BI Dashboard</span>
               </Link>
@@ -93,7 +107,9 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                   key={route.href}
                   href={route.href}
                   className={`flex items-center gap-2 rounded-lg px-3 py-2 ${
-                    route.active ? "bg-primary text-primary-foreground" : "hover:bg-muted"
+                    route.active
+                      ? "bg-primary text-primary-foreground"
+                      : "hover:bg-muted"
                   }`}
                 >
                   <route.icon className="h-5 w-5" />
@@ -103,7 +119,10 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
             </nav>
           </SheetContent>
         </Sheet>
-        <Link href="/dashboard" className="flex items-center gap-2 font-semibold md:text-lg">
+        <Link
+          href="/dashboard"
+          className="flex items-center gap-2 font-semibold md:text-lg"
+        >
           <BarChart3 className="h-6 w-6" />
           <span>BI Dashboard</span>
         </Link>
@@ -111,7 +130,11 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" size="icon">
-                {theme === "dark" ? <Moon className="h-5 w-5" /> : <Sun className="h-5 w-5" />}
+                {theme === "dark" ? (
+                  <Moon className="h-5 w-5" />
+                ) : (
+                  <Sun className="h-5 w-5" />
+                )}
                 <span className="sr-only">Toggle theme</span>
               </Button>
             </DropdownMenuTrigger>
@@ -165,7 +188,9 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                 key={route.href}
                 href={route.href}
                 className={`flex items-center gap-2 rounded-lg px-3 py-2 ${
-                  route.active ? "bg-primary text-primary-foreground" : "hover:bg-muted"
+                  route.active
+                    ? "bg-primary text-primary-foreground"
+                    : "hover:bg-muted"
                 }`}
               >
                 <route.icon className="h-5 w-5" />
@@ -177,6 +202,5 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
         <main className="flex-1">{children}</main>
       </div>
     </div>
-  )
+  );
 }
-

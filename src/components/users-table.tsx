@@ -27,7 +27,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 
-// Sample user data
+
 const userData = [
   {
     id: "u1",

@@ -17,7 +17,6 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-// import { useToast } from "@/hooks/use-toast"
 import { toast } from "@/lib/toast";
 
 export default function RegisterPage() {
@@ -48,7 +47,6 @@ export default function RegisterPage() {
         throw new Error("Password must be at least 8 characters long");
       }
 
-      // Simulate API call
       await new Promise((resolve) => setTimeout(resolve, 1000));
 
       toast.success({

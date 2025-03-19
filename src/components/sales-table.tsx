@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { useState } from "react"
+import { useState } from "react";
 import {
   type ColumnDef,
   type ColumnFiltersState,
@@ -11,10 +11,10 @@ import {
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
-} from "@tanstack/react-table"
-import { ArrowUpDown, ChevronDown, MoreHorizontal } from "lucide-react"
+} from "@tanstack/react-table";
+import { ArrowUpDown, ChevronDown, MoreHorizontal } from "lucide-react";
 
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -23,9 +23,16 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Input } from "@/components/ui/input"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+} from "@/components/ui/dropdown-menu";
+import { Input } from "@/components/ui/input";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 
 // Sample sales data
 const salesData = [
@@ -119,9 +126,9 @@ const salesData = [
     date: "2023-03-13T11:15:00",
     items: 4,
   },
-]
+];
 
-// Column definitions
+
 const columns: ColumnDef<(typeof salesData)[0]>[] = [
   {
     accessorKey: "id",
@@ -137,26 +144,29 @@ const columns: ColumnDef<(typeof salesData)[0]>[] = [
     accessorKey: "amount",
     header: ({ column }) => {
       return (
-        <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
           Amount
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
-      )
+      );
     },
     cell: ({ row }) => {
-      const amount = Number.parseFloat(row.getValue("amount"))
+      const amount = Number.parseFloat(row.getValue("amount"));
       const formatted = new Intl.NumberFormat("en-US", {
         style: "currency",
         currency: "USD",
-      }).format(amount)
-      return <div className="text-right font-medium">{formatted}</div>
+      }).format(amount);
+      return <div className="text-right font-medium">{formatted}</div>;
     },
   },
   {
     accessorKey: "status",
     header: "Status",
     cell: ({ row }) => {
-      const status = row.getValue("status") as string
+      const status = row.getValue("status") as string;
       return (
         <div className="capitalize">
           <span
@@ -164,41 +174,46 @@ const columns: ColumnDef<(typeof salesData)[0]>[] = [
               status === "completed"
                 ? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300"
                 : status === "processing"
-                  ? "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300"
-                  : "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300"
+                ? "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300"
+                : "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300"
             }`}
           >
             {status}
           </span>
         </div>
-      )
+      );
     },
   },
   {
     accessorKey: "date",
     header: ({ column }) => {
       return (
-        <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
           Date
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
-      )
+      );
     },
     cell: ({ row }) => {
-      const date = new Date(row.getValue("date"))
-      return <div>{date.toLocaleDateString()}</div>
+      const date = new Date(row.getValue("date"));
+      return <div>{date.toLocaleDateString()}</div>;
     },
   },
   {
     accessorKey: "items",
     header: "Items",
-    cell: ({ row }) => <div className="text-center">{row.getValue("items")}</div>,
+    cell: ({ row }) => (
+      <div className="text-center">{row.getValue("items")}</div>
+    ),
   },
   {
     id: "actions",
     enableHiding: false,
     cell: ({ row }) => {
-      const sale = row.original
+      const sale = row.original;
 
       return (
         <DropdownMenu>
@@ -210,26 +225,30 @@ const columns: ColumnDef<(typeof salesData)[0]>[] = [
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem onClick={() => navigator.clipboard.writeText(sale.id)}>Copy invoice ID</DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => navigator.clipboard.writeText(sale.id)}
+            >
+              Copy invoice ID
+            </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem>View invoice details</DropdownMenuItem>
             <DropdownMenuItem>Download invoice</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
-      )
+      );
     },
   },
-]
+];
 
 interface SalesTableProps {
-  limit?: number
+  limit?: number;
 }
 
 export function SalesTable({ limit }: SalesTableProps) {
-  const [sorting, setSorting] = useState<SortingState>([])
-  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
+  const [sorting, setSorting] = useState<SortingState>([]);
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 
-  const data = limit ? salesData.slice(0, limit) : salesData
+  const data = limit ? salesData.slice(0, limit) : salesData;
 
   const table = useReactTable({
     data,
@@ -244,7 +263,7 @@ export function SalesTable({ limit }: SalesTableProps) {
       sorting,
       columnFilters,
     },
-  })
+  });
 
   return (
     <div className="w-full">
@@ -252,8 +271,12 @@ export function SalesTable({ limit }: SalesTableProps) {
         <div className="flex items-center py-4">
           <Input
             placeholder="Filter by customer..."
-            value={(table.getColumn("customer")?.getFilterValue() as string) ?? ""}
-            onChange={(event) => table.getColumn("customer")?.setFilterValue(event.target.value)}
+            value={
+              (table.getColumn("customer")?.getFilterValue() as string) ?? ""
+            }
+            onChange={(event) =>
+              table.getColumn("customer")?.setFilterValue(event.target.value)
+            }
             className="max-w-sm"
           />
           <DropdownMenu>
@@ -272,11 +295,13 @@ export function SalesTable({ limit }: SalesTableProps) {
                       key={column.id}
                       className="capitalize"
                       checked={column.getIsVisible()}
-                      onCheckedChange={(value) => column.toggleVisibility(!!value)}
+                      onCheckedChange={(value) =>
+                        column.toggleVisibility(!!value)
+                      }
                     >
                       {column.id}
                     </DropdownMenuCheckboxItem>
-                  )
+                  );
                 })}
             </DropdownMenuContent>
           </DropdownMenu>
@@ -290,9 +315,14 @@ export function SalesTable({ limit }: SalesTableProps) {
                 {headerGroup.headers.map((header) => {
                   return (
                     <TableHead key={header.id}>
-                      {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
+                      {header.isPlaceholder
+                        ? null
+                        : flexRender(
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
                     </TableHead>
-                  )
+                  );
                 })}
               </TableRow>
             ))}
@@ -300,15 +330,26 @@ export function SalesTable({ limit }: SalesTableProps) {
           <TableBody>
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
-                <TableRow key={row.id} data-state={row.getIsSelected() && "selected"}>
+                <TableRow
+                  key={row.id}
+                  data-state={row.getIsSelected() && "selected"}
+                >
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
+                    <TableCell key={cell.id}>
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext()
+                      )}
+                    </TableCell>
                   ))}
                 </TableRow>
               ))
             ) : (
               <TableRow>
-                <TableCell colSpan={columns.length} className="h-24 text-center">
+                <TableCell
+                  colSpan={columns.length}
+                  className="h-24 text-center"
+                >
                   No results.
                 </TableCell>
               </TableRow>
@@ -319,10 +360,15 @@ export function SalesTable({ limit }: SalesTableProps) {
       {!limit && (
         <div className="flex items-center justify-end space-x-2 py-4">
           <div className="flex-1 text-sm text-muted-foreground">
-            Showing {table.getState().pagination.pageIndex * table.getState().pagination.pageSize + 1} to{" "}
+            Showing{" "}
+            {table.getState().pagination.pageIndex *
+              table.getState().pagination.pageSize +
+              1}{" "}
+            to{" "}
             {Math.min(
-              (table.getState().pagination.pageIndex + 1) * table.getState().pagination.pageSize,
-              table.getFilteredRowModel().rows.length,
+              (table.getState().pagination.pageIndex + 1) *
+                table.getState().pagination.pageSize,
+              table.getFilteredRowModel().rows.length
             )}{" "}
             of {table.getFilteredRowModel().rows.length} entries
           </div>
@@ -334,12 +380,16 @@ export function SalesTable({ limit }: SalesTableProps) {
           >
             Previous
           </Button>
-          <Button variant="outline" size="sm" onClick={() => table.nextPage()} disabled={!table.getCanNextPage()}>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => table.nextPage()}
+            disabled={!table.getCanNextPage()}
+          >
             Next
           </Button>
         </div>
       )}
     </div>
-  )
+  );
 }
-
