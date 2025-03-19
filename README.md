@@ -56,7 +56,9 @@ A comprehensive Business Intelligence (BI) tool with user authentication, data v
 
 1. **Clone the repository**
 
-   ```bash
+   ```
+   
+   bash
    git clone https://github.com/Nwanne-san/bi-dashboard.git
    cd bi-dashboard
 
@@ -64,7 +66,9 @@ A comprehensive Business Intelligence (BI) tool with user authentication, data v
 
 2. **Install dependencies**
 
-   ```npm install
+   ```
+   
+   npm install
     # or
    yarn install
 
@@ -72,7 +76,9 @@ A comprehensive Business Intelligence (BI) tool with user authentication, data v
 
 3. **Run the development server**
 
-   ```npm run dev
+   ```
+   
+   npm run dev
     # or
    yarn dev
 
@@ -81,6 +87,7 @@ A comprehensive Business Intelligence (BI) tool with user authentication, data v
 4. **Open broswer and navigate to [http://localhost:3000]**
 
 ## Project Structure
+```
 
 bi-dashboard/
 ├── app/ # Next.js App Router
@@ -99,6 +106,8 @@ bi-dashboard/
 ├── middleware.ts # Next.js middleware for auth
 ├── public/ # Static assets
 └── ...
+
+```
 
 ## Authentication Flow
 
